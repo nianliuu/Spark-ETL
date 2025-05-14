@@ -3,7 +3,10 @@ package example
 import org.apache.spark.sql.SparkSession
 
 object BinlogReadDemo extends App {
-  val filePath = "data/read_binlog/delta_str_pk"
+  val deleteFilePath = "data/read_binlog/delta_str_pk"
+  val insertVarcharFilePath = "data/read_binlog/insert_varchar"
+  val insertShortFilePath = "data/read_binlog/insert_short"
+  val insertVecFilePath = "data/read_binlog/insert_float_vec"
 
   val spark = SparkSession
     .builder()
@@ -13,10 +16,31 @@ object BinlogReadDemo extends App {
 
   val df = spark.read
     .format("milvusbinlog")
-    .option("path", filePath)
+    .option("path", deleteFilePath)
+    .option("readerType", "delete")
     .load()
-
   df.show()
+
+  val df2 = spark.read
+    .format("milvusbinlog")
+    .option("path", insertVarcharFilePath)
+    .option("readerType", "insert")
+    .load()
+  df2.show()
+
+  val df3 = spark.read
+    .format("milvusbinlog")
+    .option("path", insertShortFilePath)
+    .option("readerType", "insert")
+    .load()
+  df3.show()
+
+  val df4 = spark.read
+    .format("milvusbinlog")
+    .option("path", insertVecFilePath)
+    .option("readerType", "insert")
+    .load()
+  df4.show()
 
   spark.stop()
 }
