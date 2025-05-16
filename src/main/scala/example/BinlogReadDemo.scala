@@ -7,6 +7,7 @@ object BinlogReadDemo extends App {
   val insertVarcharFilePath = "data/read_binlog/insert_varchar"
   val insertShortFilePath = "data/read_binlog/insert_short"
   val insertVecFilePath = "data/read_binlog/insert_float_vec"
+  // val minioPath = "data/insert_short"
 
   val spark = SparkSession
     .builder()
@@ -41,6 +42,14 @@ object BinlogReadDemo extends App {
     .option("readerType", "insert")
     .load()
   df4.show()
+
+  // val df5 = spark.read
+  //   .format("milvusbinlog")
+  //   .option("path", minioPath)
+  //   .option("s3.fs", "s3a://")
+  //   .option("readerType", "insert")
+  //   .load()
+  // df5.show()
 
   spark.stop()
 }
