@@ -113,6 +113,7 @@ object FloatInsertDemo extends App {
     .mode(SaveMode.Append)
     .save()
   println("insert data success")
-  milvusClient.close()
+
   spark.stop()
+  milvusClient.close()
 }
