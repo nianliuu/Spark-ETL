@@ -3,10 +3,10 @@ package example
 import org.apache.spark.sql.SparkSession
 
 object CollectionBinlogReadDemo extends App {
-  val collection = "458064902976430480"
-  val partition = "458064902976430481"
-  val segment = "458064902976430580"
-  val field = "100"
+  val collection = "458155846610556542"
+  val partition = "458155846610556543"
+  val segment = "458155846610556627"
+  val field = "101"
   // val minioPath = "data" // 支持目录/文件读取
 
   val spark = SparkSession
