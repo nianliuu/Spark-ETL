@@ -18,20 +18,20 @@ object CollectionBinlogReadDemo extends App {
 
   val df = spark.read
     .format("milvusbinlog")
-    .option("s3.fs", "s3a://")
-    .option(MilvusOption.MILVUS_COLLECTION_ID, collection)
-    .option("readerType", "delete")
+    .option(MilvusOption.S3FileSystemTypeName, "s3a://")
+    .option(MilvusOption.MilvusCollectionID, collection)
+    .option(MilvusOption.ReaderType, "delete")
     .load()
   df.show()
 
   val df2 = spark.read
     .format("milvusbinlog")
-    .option("s3.fs", "s3a://")
-    .option(MilvusOption.MILVUS_COLLECTION_ID, collection)
-    .option(MilvusOption.MILVUS_PARTITION_ID, partition)
-    // .option(MilvusOption.MILVUS_SEGMENT_ID, segment)
-    .option(MilvusOption.MILVUS_FIELD_ID, field)
-    .option("readerType", "insert")
+    .option(MilvusOption.S3FileSystemTypeName, "s3a://")
+    .option(MilvusOption.MilvusCollectionID, collection)
+    .option(MilvusOption.MilvusPartitionID, partition)
+    // .option(MilvusOption.MilvusSegmentID, segment)
+    .option(MilvusOption.MilvusFieldID, field)
+    .option(MilvusOption.ReaderType, "insert")
     .load()
   df2.show()
 

@@ -103,9 +103,9 @@ object DoubleInsertDemo extends App {
     )
     .json(filePath)
   val milvusOption = Map(
-    MilvusOption.URI_KEY -> uri,
-    MilvusOption.TOKEN_KEY -> token,
-    MilvusOption.MILVUS_COLLECTION_NAME -> collectionName
+    MilvusOption.MilvusUri -> uri,
+    MilvusOption.MilvusToken -> token,
+    MilvusOption.MilvusCollectionName -> collectionName
   )
   df.write
     .options(milvusOption)

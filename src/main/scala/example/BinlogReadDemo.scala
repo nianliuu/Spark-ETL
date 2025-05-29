@@ -1,6 +1,7 @@
 package example
 
 import org.apache.spark.sql.SparkSession
+import com.zilliz.spark.connector.MilvusOption
 
 object BinlogReadDemo extends App {
   val deleteFilePath = "data/read_binlog/delta_str_pk"
@@ -17,39 +18,39 @@ object BinlogReadDemo extends App {
 
   val df = spark.read
     .format("milvusbinlog")
-    .option("path", deleteFilePath)
-    .option("readerType", "delete")
+    .option(MilvusOption.ReaderPath, deleteFilePath)
+    .option(MilvusOption.ReaderType, "delete")
     .load()
   df.show()
 
   val df2 = spark.read
     .format("milvusbinlog")
-    .option("path", insertVarcharFilePath)
-    .option("readerType", "insert")
+    .option(MilvusOption.ReaderPath, insertVarcharFilePath)
+    .option(MilvusOption.ReaderType, "insert")
     .load()
   df2.show()
 
   val df3 = spark.read
     .format("milvusbinlog")
-    .option("path", insertShortFilePath)
-    .option("readerType", "insert")
+    .option(MilvusOption.ReaderPath, insertShortFilePath)
+    .option(MilvusOption.ReaderType, "insert")
     .load()
   df3.show()
 
   val df4 = spark.read
     .format("milvusbinlog")
-    .option("path", insertVecFilePath)
-    .option("readerType", "insert")
+    .option(MilvusOption.ReaderPath, insertVecFilePath)
+    .option(MilvusOption.ReaderType, "insert")
     .load()
   df4.show()
 
-  val df5 = spark.read
-    .format("milvusbinlog")
-    .option("path", minioPath)
-    .option("s3.fs", "s3a://")
-    .option("readerType", "insert")
-    .load()
-  df5.show()
+  // val df5 = spark.read
+  //   .format("milvusbinlog")
+  //   .option(MilvusOption.ReaderPath, minioPath)
+  //   .option(MilvusOption.S3FileSystemTypeName, "s3a://")
+  //   .option(MilvusOption.ReaderType, "insert")
+  //   .load()
+  // df5.show()
 
   spark.stop()
 }
