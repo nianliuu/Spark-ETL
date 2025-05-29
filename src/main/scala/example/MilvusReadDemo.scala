@@ -6,10 +6,10 @@ import com.zilliz.spark.connector.MilvusOption
 object MilvusReadDemo extends App {
   val uri = "http://localhost:19530"
   val token = "root:Milvus"
-  val collectionName = "hello_milvus"
+  val collectionName = "hello_mix"
   val milvusSegmentPath = "insert_log/458155846610556542/458155846610556543/458155846610556627"
   // a-bucket/files/insert_log/458155846609142108/458155846609142109
-  val collection = "458155846610556542"
+  val collection = "458338271272109051"
   val partition = "458155846610556543"
   val segment = "458155846610556627"
 
@@ -32,9 +32,9 @@ object MilvusReadDemo extends App {
 
   val df2 = spark.read
     .format("milvus")
-    .option("collection", collection)
-    .option("partition", partition)
-    .option("segment", segment)
+    .option(MilvusOption.MILVUS_COLLECTION_ID, collection)
+    .option(MilvusOption.MILVUS_PARTITION_ID, partition)
+    .option(MilvusOption.MILVUS_SEGMENT_ID, segment)
     .option("readerType", "insert")
     .option("s3.fs", "s3a://")
     .option(MilvusOption.URI_KEY, uri)
@@ -45,9 +45,11 @@ object MilvusReadDemo extends App {
 
   val df3 = spark.read
     .format("milvus")
-    .option("collection", collection)
+    .option(MilvusOption.MILVUS_COLLECTION_ID, collection)
     .option("readerType", "insert")
     .option("s3.fs", "s3a://")
+    // .option("beginTimestamp", "458338327854317571")
+    // .option("endTimestamp", "458338327854317571")
     .option(MilvusOption.URI_KEY, uri)
     .option(MilvusOption.TOKEN_KEY, token)
     .option(MilvusOption.MILVUS_COLLECTION_NAME, collectionName)
@@ -56,7 +58,6 @@ object MilvusReadDemo extends App {
 
   val df4 = spark.read
     .format("milvus")
-    .option("collection", collection)
     .option("readerType", "insert")
     .option("s3.fs", "s3a://")
     .option(MilvusOption.URI_KEY, uri)

@@ -7,7 +7,7 @@ object BinlogReadDemo extends App {
   val insertVarcharFilePath = "data/read_binlog/insert_varchar"
   val insertShortFilePath = "data/read_binlog/insert_short"
   val insertVecFilePath = "data/read_binlog/insert_float_vec"
-  val minioPath = "insert_log/458155846610556542/458155846610556543/458155846610556627/101/458155846610556630" // 支持目录/文件读取
+  val minioPath = "insert_log/458155846610556542/458155846610556543/458155846610556627/101/458155846610556630"
 
   val spark = SparkSession
     .builder()
