@@ -2,11 +2,12 @@ package example
 
 import org.apache.spark.sql.SparkSession
 import com.zilliz.spark.connector.MilvusOption
+import com.zilliz.spark.connector.filter.VectorBruteForceSearch
 
 object MilvusReadDemo extends App {
   val uri = "http://localhost:19530"
   val token = "root:Milvus"
-  val collectionName = "hello_mix"
+  val collectionName = "hello_vec"
   val milvusSegmentPath = "insert_log/458155846610556542/458155846610556543/458155846610556627"
   val collection = "458338271272109051"
   val partition = "458155846610556543"
@@ -64,6 +65,21 @@ object MilvusReadDemo extends App {
     .option(MilvusOption.MilvusCollectionName, collectionName)
     .load()
   df4.show()
+
+
+  // generate a random vector with 16 elements
+  val randomVector = Array.fill(16)(scala.util.Random.nextFloat())
+  println(s"randomVector: ${randomVector.mkString("[", ", ", "]")}")
+  val topKResults = VectorBruteForceSearch.filterSimilarVectors(
+      df = df4,
+      queryVector = randomVector,
+      k = 10,
+      vectorCol = "vector",
+      idCol = Some("id")
+    )
+
+  println(s"\nTop 10 brute force search results:")
+  topKResults.show()
 
   spark.stop()
 }
