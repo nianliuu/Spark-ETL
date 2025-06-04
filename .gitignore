@@ -11,3 +11,22 @@ project/target
 .DS_Store
 note.md
 *.log
+
+# Spark directories and files
+spark/
+spark-*/
+spark-warehouse/
+metastore_db/
+derby.log
+checkpoint/
+
+# Configuration files with sensitive data
+config/application.json
+config/prod.json
+config/*.json
+!config/template.json
+
+# Additional Spark and Hadoop related
+warehouse/
+*.parquet
+*.orc

@@ -1,0 +1,33 @@
+# Git files
+.git
+.gitignore
+
+# IDE files
+.idea
+.vscode
+*.swp
+*.swo
+
+# Build artifacts that will be rebuilt in container
+target/scala-2.13/classes
+target/scala-2.13/test-classes
+target/scala-2.13/sync
+target/scala-2.13/zinc
+target/scala-2.13/update
+target/streams
+target/global-logging
+
+# SBT files
+.bsp
+.bloop
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/ 

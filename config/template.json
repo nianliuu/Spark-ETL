@@ -1,0 +1,23 @@
+{
+  "milvus": {
+    "uri": "https://your-milvus-endpoint.com:19541",
+    "token": "your-milvus-token",
+    "collectionName": "your_collection_name"
+  },
+  "s3": {
+    "endpoint": "https://s3.your-region.amazonaws.com",
+    "bucketName": "your-bucket-name",
+    "rootPath": "your-root-path/",
+    "accessKey": "YOUR_S3_ACCESS_KEY",
+    "secretKey": "YOUR_S3_SECRET_KEY"
+  },
+  "spark": {
+    "appName": "MergeDataDemo",
+    "master": "local[*]",
+    "driverMemory": "4g",
+    "executorMemory": "2g"
+  },
+  "schema": {
+    "idField": "id"
+  }
+} 
